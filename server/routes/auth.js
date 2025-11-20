@@ -57,6 +57,7 @@ router.post("/google-signup", async (req, res) => {
 
     console.log("✅ Login success for:", email);
     res.status(200).json({ user, token: appToken });
+    console.log("user signing up");
   } catch (error) {
     console.error("❌ Google signup failed:", error.message || error);
     res.status(401).json({ message: "Invalid Google Token" });
@@ -67,7 +68,7 @@ router.post("/google-signup", async (req, res) => {
 router.post("/google-login", async (req, res) => {
   console.log("🔹 Request body received:", req.body); // Check what frontend sent
   const { token } = req.body;
-  console.log("Token received for verification:", token); // See if it’s undefined
+  console.log("Token received for verification:", token);
 
   try {
     const ticket = await client.verifyIdToken({
@@ -102,6 +103,7 @@ router.post("/google-login", async (req, res) => {
     }); // ✅ send JSON
     // 🔹 yaha redirect karwa do
     // res.redirect("http://localhost:3000/profile");
+    console.log("user logged in");
   } catch (error) {
     console.error("❌ Google login failed:", error.message || error);
     res.status(401).json({ message: "Invalid Google Token" });

@@ -4,14 +4,56 @@ export default function CartOffcanvas({ cartItems, handleRemove, handleQuantityC
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
-  const handleCheckout = () => {
+
+  // const handleCheckout = () => {
+  //   if (!user) {
+  //     setMessage("⚠️ Please login to place your order!");
+  //   } else {
+  //     setMessage("✅ Order placed successfully!");
+  //     // 👇 yaha backend ko call karke order save bhi kar sakti ho
+  //     // await fetch("/orders", {method:"POST", body: JSON.stringify(cartItems)})
+  //   }
+  //   setShowPopup(true);
+  // };
+
+  const handleCheckout = async () => {
     if (!user) {
       setMessage("⚠️ Please login to place your order!");
-    } else {
-      setMessage("✅ Order placed successfully!");
-      // 👇 yaha backend ko call karke order save bhi kar sakti ho
-      // await fetch("/orders", {method:"POST", body: JSON.stringify(cartItems)})
+      setShowPopup(true);
+      return;
     }
+    if (total === 0) {
+      setMessage("⚠️ Please select items to place your order!");
+      setShowPopup(true);
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/order/place", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // your JWT
+        },
+        body: JSON.stringify({
+          email: user.email, // 👈 add this line
+          items: cartItems,
+          total,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage("✅ Order placed successfully! Check your email 📧");
+      } else {
+        setMessage("❌ Failed to place order. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage("⚠️ Something went wrong. Try again later.");
+    }
+
     setShowPopup(true);
   };
 
@@ -21,7 +63,6 @@ export default function CartOffcanvas({ cartItems, handleRemove, handleQuantityC
         <h5 id="offcanvasCartLabel">Shopping Cart</h5>
         <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-
       <div className="offcanvas-body">
         {cartItems.length === 0 ? (
           <p className="text-muted">Your cart is empty.</p>
@@ -34,15 +75,12 @@ export default function CartOffcanvas({ cartItems, handleRemove, handleQuantityC
                 <p className="mb-1">₹{item.price}</p>
 
                 <div className="d-flex align-items-center">
-                  {/* <button className="btn btn-sm btn-outline-secondary" onClick={() => handleQuantityChange(item.id, item.quantity - 1)} > <i className="bi bi-dash"></i></button> */}
                   <i className="bi bi-cart-dash-fill mx-2 text-secondary" style={{ fontSize: "1.5rem", cursor: "pointer" }} onClick={() => handleQuantityChange(item.id, item.quantity - 1)}></i>
                   <span className="mx-2">{item.quantity}</span>
-                  {/* <button className="btn btn-sm btn-outline-secondary" onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>  <i className="bi bi-plus"></i></button> */}
                   <i className="bi bi-cart-plus-fill mx-2 text-secondary" style={{ fontSize: "1.5rem", cursor: "pointer" }} onClick={() => handleQuantityChange(item.id, item.quantity + 1)}></i>
                 </div>
               </div>
               <i class="bi bi-x-square-fill" onClick={() => handleRemove(item.id)} style={{ cursor: "pointer", color: "red", fontSize: "1.4rem" }}></i>
-              {/* <button className="btn btn-sm btn-danger ms-2"  >×</button> */}
             </div>
           ))
         )}

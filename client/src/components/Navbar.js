@@ -93,12 +93,14 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
     setUser(null); // remove from UI
     setCartItems([]); // cart empty
     toast.success("Logged out ", { position: "top-right", autoClose: 500, hideProgressBar: true, style: { background: "#E9FFF1", color: "#004B3C", fontWeight: "500", fontSize: "0.95rem", borderRadius: "8px", boxShadow: "0px 2px 10px rgba(0,0,0,0.1)" } });
+    console.log("user logged out");
   };
 
   return (
     <nav className="navbar py-3 navbar-expand-lg sticky-top " style={{ backgroundColor: "#004B3C" }}>
       <div className="container-fluid">
         <Link to="/" className="navbar-brand text-white" onClick={() => setsearchQuery("")}>
+          <img src="/favicon.ico" alt="logo" style={{ width: "25px", height: "25px", marginRight: "8px" }} />
           Cartify
         </Link>
 

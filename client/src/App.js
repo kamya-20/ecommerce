@@ -7,7 +7,6 @@ import axios from "axios";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Cart from "./components/Cart";
 import ProductDetails from "./components/ProductDetails";
 import CartOffcanvas from "./components/CartOffcanvas";
 import { ToastContainer } from "react-toastify";
