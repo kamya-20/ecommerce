@@ -36,7 +36,7 @@ export default function Signup({ setUser }) {
     const idToken = response.credential; // this is google ID token not jwt
 
     try {
-      const res = await fetch("http://localhost:5000/auth/google-signup", {
+      const res = await fetch("https://cartify-56ii.onrender.com/auth/google-signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // Backend will set cookie
@@ -45,7 +45,7 @@ export default function Signup({ setUser }) {
 
       if (res.ok) {
         // ✅ Fetch profile after signup
-        const profileRes = await fetch("http://localhost:5000/profile", {
+        const profileRes = await fetch("https://cartify-56ii.onrender.com/profile", {
           credentials: "include",
         });
 

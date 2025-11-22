@@ -13,7 +13,7 @@ export default function Login({ setUser }) {
     console.log("ID Token received:", idToken); // Check if token exists
 
     try {
-      const res = await fetch("http://localhost:5000/auth/google-login", {
+      const res = await fetch("https://cartify-56ii.onrender.com/auth/google-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // Backend cookie set karega
@@ -22,7 +22,7 @@ export default function Login({ setUser }) {
 
       if (res.ok) {
         // ✅ Profile API call bhi isi block ke andar karo
-        const profileRes = await fetch("http://localhost:5000/profile", {
+        const profileRes = await fetch("https://cartify-56ii.onrender.com/profile", {
           credentials: "include",
         });
 

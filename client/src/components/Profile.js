@@ -4,7 +4,7 @@ export default function Profile() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/profile", {
+    fetch("https://cartify-56ii.onrender.com/profile", {
       method: "GET",
       credentials: "include",
     })

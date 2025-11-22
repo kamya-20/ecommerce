@@ -29,7 +29,7 @@ export default function CartOffcanvas({ cartItems, handleRemove, handleQuantityC
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/order/place", {
+      const response = await fetch("https://cartify-56ii.onrender.com/api/order/place", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

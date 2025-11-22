@@ -71,7 +71,7 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:5000/profile", {
+        const res = await fetch("https://cartify-56ii.onrender.com/profile", {
           credentials: "include", // send cookie
         });
         if (res.ok) {
@@ -86,7 +86,7 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
   }, []);
 
   const handleLogout = async () => {
-    await fetch("http://localhost:5000/auth/logout", {
+    await fetch("https://cartify-56ii.onrender.com/auth/logout", {
       method: "POST",
       credentials: "include",
     });
