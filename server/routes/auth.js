@@ -50,8 +50,8 @@ router.post("/google-signup", async (req, res) => {
     // Step 4: Send cookie
     res.cookie("token", appToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -89,8 +89,8 @@ router.post("/google-login", async (req, res) => {
 
     res.cookie("token", appToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     res.status(200).json({
