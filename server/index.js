@@ -10,7 +10,22 @@ const verifyJWT = require("./middleware/auth"); // this is a fxn jo we created k
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: ["http://localhost:3000", "https://cartify-woad-six.vercel.app/"], credentials: true })); // frontend URL
+const allowedOrigins = ["https://cartify-woad-six.vercel.app", "http://localhost:3000"];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+// app.use(cors({ origin: ["https://cartify-woad-six.vercel.app/", "http://localhost:3000"], credentials: true })); // frontend URL
 app.use(express.json());
 app.use(cookieParser());
 
