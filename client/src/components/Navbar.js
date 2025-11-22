@@ -72,7 +72,11 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
     const fetchUser = async () => {
       try {
         const res = await fetch("https://cartify-56ii.onrender.com/profile", {
+          method: "GET",
           credentials: "include", // send cookie
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
         if (res.ok) {
           const data = await res.json();
