@@ -16,6 +16,7 @@ export default function Login({ setUser }) {
       const res = await fetch("https://cartify-56ii.onrender.com/auth/google-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        mode: "cors",
         credentials: "include", // Backend cookie set karega
         body: JSON.stringify({ token: idToken }),
       });

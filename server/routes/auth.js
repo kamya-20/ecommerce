@@ -8,8 +8,8 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // POST /auth/google-signup
 router.post("/google-signup", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
+  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  // res.setHeader("Access-Control-Allow-Credentials", "true");
 
   const { token } = req.body;
   console.log("🔹 Received Google ID token:", token?.substring(0, 20) + "...");

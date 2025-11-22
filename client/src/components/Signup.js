@@ -39,6 +39,7 @@ export default function Signup({ setUser }) {
       const res = await fetch("https://cartify-56ii.onrender.com/auth/google-signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        mode: "cors",
         credentials: "include", // Backend will set cookie
         body: JSON.stringify({ token: idToken }),
       });
