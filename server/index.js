@@ -38,8 +38,8 @@ app.use(
     credentials: true,
   })
 );
+// app.options("/*", cors());
 
-// app.use(cors({ origin: ["https://cartify-woad-six.vercel.app/", "http://localhost:3000"], credentials: true })); // frontend URL
 app.use(express.json());
 app.use(cookieParser());
 

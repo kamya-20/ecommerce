@@ -67,11 +67,11 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   // Fetch user info when navbar loads
-
+  const API = process.env.REACT_APP_API_URL;
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("https://cartify-56ii.onrender.com/profile", {
+        const res = await fetch(`${API}/profile`, {
           method: "GET",
           credentials: "include", // send cookie
           headers: {
@@ -90,7 +90,7 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
   }, []);
 
   const handleLogout = async () => {
-    await fetch("https://cartify-56ii.onrender.com/auth/logout", {
+    await fetch(`${API}/logout`, {
       method: "POST",
       credentials: "include",
     });
@@ -107,14 +107,18 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
           <img src="/favicon.ico" alt="logo" style={{ width: "25px", height: "25px", marginRight: "8px" }} />
           Cartify
         </Link>
+        {/* ⭐ CHANGE ADDED — Mobile menu toggler button */}
+        <button className="navbar-toggler bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           {/* Search Bar */}
           <form className="d-flex ms-5" onSubmit={(e) => e.preventDefault()}>
             <input className="form-control me-2" type="search" placeholder="Search" value={searchQuery} onChange={(e) => setsearchQuery(e.target.value)} style={{ width: "350px", height: "35px" }} />
           </form>
-
-          <div className="d-flex align-items-center ms-auto gap-3">
+          {/* ⭐ CHANGE ADDED — flex-column for mobile responsiveness */}
+          <div className="d-flex align-items-center ms-auto gap-3 flex-column flex-lg-row">
             {/* Cart */}
             <div className="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" style={{ cursor: "pointer", width: "30px" }}>
               <i className="bi bi-cart" style={{ fontSize: "1.5rem", color: "white" }}></i>
