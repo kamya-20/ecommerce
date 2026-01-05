@@ -90,7 +90,7 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
   }, []);
 
   const handleLogout = async () => {
-    await fetch(`${API}/logout`, {
+    await fetch(`${API}/auth/logout`, {
       method: "POST",
       credentials: "include",
     });

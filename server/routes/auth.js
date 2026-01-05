@@ -110,6 +110,17 @@ router.post("/google-login", async (req, res) => {
   }
 });
 
+// POST /auth/logout
+router.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
 module.exports = router;
 
 // router.post("/google-login", async (req, res) => {
