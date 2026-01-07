@@ -58,39 +58,79 @@ export default function CartOffcanvas({ cartItems, handleRemove, handleQuantityC
   };
 
   return (
-    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel" data-bs-backdrop="static" style={{ width: "35vw" }}>
-      <div className="offcanvas-header">
-        <h5 id="offcanvasCartLabel">Shopping Cart</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div
+      className="offcanvas offcanvas-end"
+      tabIndex="-1"
+      id="offcanvasCart"
+      aria-labelledby="offcanvasCartLabel"
+      data-bs-backdrop="static"
+      style={{
+        width: window.innerWidth < 768 ? "100vw" : "35vw",
+      }}>
+      <div className="offcanvas-header d-flex align-items-center">
+        {/* Mobile Back Button */}
+        <button type="button" className="btn d-md-none me-2" data-bs-dismiss="offcanvas" style={{ fontSize: "1.2rem" }}>
+          ←
+        </button>
+
+        <h5 id="offcanvasCartLabel" className="mb-0">
+          Shopping Cart
+        </h5>
+
+        {/* Close button only for desktop */}
+        <button type="button" className="btn-close d-none d-md-block" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
+
       <div className="offcanvas-body">
         {cartItems.length === 0 ? (
           <p className="text-muted">Your cart is empty.</p>
         ) : (
           cartItems.map((item) => (
             <div key={item.id} className="d-flex mb-3 align-items-center border-bottom pb-2">
-              <img src={item.image} alt={item.title} style={{ width: "60px", height: "60px", objectFit: "contain" }} className="me-3" />
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  objectFit: "contain",
+                }}
+                className="me-3"
+              />
+
               <div className="flex-grow-1">
                 <h6 className="mb-1">{item.title}</h6>
                 <p className="mb-1">₹{item.price}</p>
 
                 <div className="d-flex align-items-center">
                   <i className="bi bi-cart-dash-fill mx-2 text-secondary" style={{ fontSize: "1.5rem", cursor: "pointer" }} onClick={() => handleQuantityChange(item.id, item.quantity - 1)}></i>
+
                   <span className="mx-2">{item.quantity}</span>
+
                   <i className="bi bi-cart-plus-fill mx-2 text-secondary" style={{ fontSize: "1.5rem", cursor: "pointer" }} onClick={() => handleQuantityChange(item.id, item.quantity + 1)}></i>
                 </div>
               </div>
-              <i class="bi bi-x-square-fill" onClick={() => handleRemove(item.id)} style={{ cursor: "pointer", color: "red", fontSize: "1.4rem" }}></i>
+
+              <i
+                className="bi bi-x-square-fill"
+                onClick={() => handleRemove(item.id)}
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "1.4rem",
+                }}></i>
             </div>
           ))
         )}
 
-        <div className="mt-3  w-100 btn-lg">
+        <div className="mt-3 w-100 btn-lg">
           <h5>Total: ₹{total}</h5>
+
           <button className="btn btn-success w-100 mt-3" onClick={handleCheckout}>
             Proceed to Checkout
           </button>
-          {/* Popup Overlay */}
+
+          {/* Popup */}
           {showPopup && (
             <div
               style={{
@@ -99,7 +139,7 @@ export default function CartOffcanvas({ cartItems, handleRemove, handleQuantityC
                 left: 0,
                 width: "100%",
                 height: "100%",
-                backgroundColor: "rgba(0,0,0,0.5)", // black transparent bg
+                backgroundColor: "rgba(0,0,0,0.5)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

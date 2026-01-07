@@ -107,17 +107,20 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
           <img src="/favicon.ico" alt="logo" style={{ width: "25px", height: "25px", marginRight: "8px" }} />
           Cartify
         </Link>
-        {/* ⭐ CHANGE ADDED — Mobile menu toggler button */}
-        <button className="navbar-toggler bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+
+        {/* ✅ FIXED: Hamburger toggler uses collapse */}
+        <button className="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        {/* ✅ Collapsible content */}
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           {/* Search Bar */}
-          <form className="d-flex ms-5" onSubmit={(e) => e.preventDefault()}>
-            <input className="form-control me-2" type="search" placeholder="Search" value={searchQuery} onChange={(e) => setsearchQuery(e.target.value)} style={{ width: "350px", height: "35px" }} />
+          <form className="d-flex ms-lg-5 my-2 my-lg-0" onSubmit={(e) => e.preventDefault()}>
+            <input className="form-control me-2 w-100 w-lg-auto" type="search" placeholder="Search" value={searchQuery} onChange={(e) => setsearchQuery(e.target.value)} style={{ width: "350px", height: "35px" }} />
           </form>
-          {/* ⭐ CHANGE ADDED — flex-column for mobile responsiveness */}
+
+          {/* Right Side */}
           <div className="d-flex align-items-center ms-auto gap-3 flex-column flex-lg-row">
             {/* Cart */}
             <div className="position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" style={{ cursor: "pointer", width: "30px" }}>
@@ -132,10 +135,10 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
             {/* Show login/signup OR user profile */}
             {!user ? (
               <>
-                <Link to="/login" className="btn btn-outline-light">
+                <Link to="/login" className="btn btn-light text-dark w-100 w-lg-auto">
                   Login
                 </Link>
-                <Link to="/signup" className="btn btn-light text-dark">
+                <Link to="/signup" className="btn btn-outline-light w-100 w-lg-auto">
                   Signup
                 </Link>
               </>
