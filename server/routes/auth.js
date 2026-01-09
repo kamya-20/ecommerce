@@ -111,13 +111,12 @@ router.post("/google-login", async (req, res) => {
 });
 
 // POST /auth/logout
-router.post("/logout", (req, res) => {
+router.post("/logout", async (req, res) => {
   res.clearCookie("token", {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    httpOnly: true, // frotend access na kr paaye
+    secure: true, // cookies sirf production p kaam kregi
+    sameSite: "none", // cookie dono sites k liye allow hoti h , front+back
   });
-
   res.status(200).json({ message: "Logged out successfully" });
 });
 

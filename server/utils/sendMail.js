@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendMail(to, subject, html) {
+  console.log("📨 Sending mail to:", to);
   const mailOptions = {
     from: `"Cartify" <${process.env.EMAIL_USER}>`,
     to,

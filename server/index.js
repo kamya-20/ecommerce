@@ -38,6 +38,7 @@ app.use(
     credentials: true,
   })
 );
+
 // app.options("/*", cors());
 
 app.use(express.json());
@@ -57,6 +58,8 @@ app.get("/", (req, res) => {
 
 app.post("/api/order/place", async (req, res) => {
   try {
+    console.log("🔥 ORDER API HIT");
+    console.log("BODY:", req.body);
     const { email, total, items } = req.body; // frontend se aa raha hai email, total & items
 
     if (!email) {
@@ -98,7 +101,7 @@ app.post("/api/order/place", async (req, res) => {
         </table>
 
         <h3 style="margin-top: 20px;">Total Amount: ₹${total}</h3>
-        <p style="color: gray;">We appreciate your trust in <b>Cartify</b>! 💖</p>
+        <p style="color: gray;">We appreciate your trust in <b>Cartify</b>!❤️.</p>
       </div>
     `;
 
