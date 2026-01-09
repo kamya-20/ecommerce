@@ -27,13 +27,13 @@ export default function CartOffcanvas({ cartItems, handleRemove, handleQuantityC
       setShowPopup(true);
       return;
     }
-
+    const API = process.env.REACT_APP_API_URL;
     try {
-      const response = await fetch("https://cartify-56ii.onrender.com/api/order/place", {
+      const response = await fetch(`${API}/api/order/place`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // your JWT
+          // Authorization: `Bearer ${localStorage.getItem("token")}`, // your JWT
         },
         body: JSON.stringify({
           email: user.email, // 👈 add this line

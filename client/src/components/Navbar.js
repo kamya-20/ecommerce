@@ -94,9 +94,10 @@ export default function Navbar({ cartItems, searchQuery, setsearchQuery, user, s
       method: "POST",
       credentials: "include",
     });
-    setUser(null); // remove from UI
-    setCartItems([]); // cart empty
-    toast.success("Logged out ", { position: "top-right", autoClose: 500, hideProgressBar: true, style: { background: "#E9FFF1", color: "#004B3C", fontWeight: "500", fontSize: "0.95rem", borderRadius: "8px", boxShadow: "0px 2px 10px rgba(0,0,0,0.1)" } });
+    // removed from UI
+    setUser(null);
+    setCartItems([]);
+    toast.success("Logged out", { position: "top-right", autoClose: 500, hideProgressBar: true, style: { background: "#E9FFF1", color: "#004B3C", fontWeight: "500", fontSize: "0.95rem", borderRadius: "8px", boxShadow: "0px 2px 10px rgba(0,0,0,0.1)" } });
     console.log("user logged out");
   };
 
